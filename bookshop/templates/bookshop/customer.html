@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+{% load math_filters %}
+<!-- customer details -->
+<section>
+    <h1>{{ customer.first_name}} {{ customer.last_name }}</h1>
+    <h2>Customer details</h2>
+    <table>
+        <tr>
+            <td>First name</td>
+            <td>{{ customer.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Last name</td>
+            <td>{{ customer.last_name }}</td>
+        </tr>
+        <tr>
+            <td>Unique identier</td>
+            <td>{{ customer.id }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ customer.email }}</td>
+        </tr>
+        <tr>
+            <td>Account status</td>
+            <td>{{ customer.status }}</td>
+        </tr>
+    </table>
+</section>
+<section>
+    <h2>Orders</h2>
+
+    {% for order in customer.orders.all %}
+    
+    <details>
+        <summary>Order {{order.id}} details</summary>
+        <table>
+            <tr>
+                <th>Book</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Total</th>
+            </tr>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{item.book.title}}</td>
+                <td>{{item.quantity}}x</td>
+                <td>{{item.book.price}}</td>
+                <td>{{item.book.price|multiply:item.quantity}}</td>
+            </tr>
+            {% endfor %}
+            <tr></tr>
+
+        </table>
+    </details>
+
+    {% endfor %}
+</section>
+
+{% endblock %}
