@@ -3,13 +3,52 @@ from django.db import models
 # Create your models here.
 
 CUSTOMER_STATUS = ((0, "Active"), (1, "Archived"), (2, "Suspended"))
-BOOK_GENRE = ((0, "Fiction"), (1, "Non-fiction"), (2, "Other"))
 BOOK_AVAILABILITY = ((0, "Unavailable"), (1, "Available"))
+# Define the genre choices
+AUTOBIOGRAPHY = 'Autobiography'
+FANTASY = 'Fantasy'
+CHILDRENS = "Children's"
+MYSTERY = 'Mystery'
+TRASHY = 'Trashy'
+DRAMA = 'Drama'
+HUMOR = 'Humor'
+SCI_FI = 'Science Fiction'
+NON_FICTION = 'Non-Fiction'
+POLITICAL_MEMOIR = 'Political memoir'
+HISTORICAL = 'Historical'
+SATIRE = 'Satire'
+VAUDEVILLE = 'Vaudeville'
+BIOGRAPHY = 'Biography'
+POETRY = 'Poetry'
+HORROR = 'Horror'
+SPORTS = 'Sports'
+FICTION = 'Fiction'
+
+BOOK_GENRE_CHOICES = (
+    (AUTOBIOGRAPHY, 'Autobiography'),
+    (FANTASY, 'Fantasy'),
+    (CHILDRENS, "Children's"),
+    (MYSTERY, 'Mystery'),
+    (TRASHY, 'Trashy'),
+    (DRAMA, 'Drama'),
+    (HUMOR, 'Humor'),
+    (SCI_FI, 'Science Fiction'),
+    (NON_FICTION, 'Non-Fiction'),
+    (POLITICAL_MEMOIR, 'Political memoir'),
+    (HISTORICAL, 'Historical'),
+    (SATIRE, 'Satire'),
+    (VAUDEVILLE, 'Vaudeville'),
+    (BIOGRAPHY, 'Biography'),
+    (POETRY, 'Poetry'),
+    (HORROR, 'Horror'),
+    (SPORTS, 'Sports'),
+    (FICTION, 'Fiction')
+)
 
 class Customer(models.Model):
     first_name = models.CharField(max_length=20)  
     last_name = models.CharField(max_length=20)  
-    email = models.EmailField(max_length=30)
+    email = models.EmailField(max_length=60)
     status = models.IntegerField(choices=CUSTOMER_STATUS, default=0)
 
 class Order(models.Model):
@@ -25,12 +64,13 @@ class OrderItem(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=["order", "book"], name="unique_book_per_order"),
-            models.CheckConstraint(condition=models.Q(quantity__gte=1), name="quantity_at_least_one"),
+            models.CheckConstraint(check=models.Q(quantity__gte=1), name="quantity_at_least_one"),
         ]
 
 class Book(models.Model):
-    title = models.CharField(max_length=20)
-    author = models.CharField(max_length=20)
-    genre = models.IntegerField(choices=BOOK_GENRE, default=0)
-    price = models.IntegerField
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=40)
+    genre = models.CharField(max_length=40, choices=BOOK_GENRE_CHOICES)
+    pages = models.PositiveIntegerField()
+    price = models.PositiveIntegerField()
     availability = models.IntegerField(choices=BOOK_AVAILABILITY, default=1)
