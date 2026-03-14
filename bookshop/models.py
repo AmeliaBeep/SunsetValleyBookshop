@@ -51,14 +51,23 @@ class Customer(models.Model):
     email = models.EmailField(max_length=60)
     status = models.IntegerField(choices=CUSTOMER_STATUS, default=0)
 
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=40)
+    genre = models.CharField(max_length=40, choices=BOOK_GENRE_CHOICES)
+    pages = models.PositiveIntegerField()
+    price = models.PositiveIntegerField()
+    availability = models.IntegerField(choices=BOOK_AVAILABILITY, default=1)
+
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="orders")
-    books = models.ManyToManyField("Book", through="OrderItem", related_name="orders")
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name="orders")
+    books = models.ManyToManyField(Book, through="OrderItem", related_name="orders")
+    total = models.PositiveIntegerField(default=0)
 
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
-    book = models.ForeignKey("Book", on_delete=models.PROTECT, related_name="order_items")
+    book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name="order_items")
     quantity = models.PositiveIntegerField(default=1)
 
     class Meta:
@@ -67,10 +76,3 @@ class OrderItem(models.Model):
             models.CheckConstraint(check=models.Q(quantity__gte=1), name="quantity_at_least_one"),
         ]
 
-class Book(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=40)
-    genre = models.CharField(max_length=40, choices=BOOK_GENRE_CHOICES)
-    pages = models.PositiveIntegerField()
-    price = models.PositiveIntegerField()
-    availability = models.IntegerField(choices=BOOK_AVAILABILITY, default=1)
