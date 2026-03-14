@@ -5,10 +5,10 @@
     "fields": {
       "title": "Point Farmer: The Story of Grant Rodiek",
       "author": "Waylon Wilsonoff",
-      "genre": "Autobiography",
+      "genre": "AUTOBIOGRAPHY",
       "pages": "546",
       "price": "25",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -17,10 +17,10 @@
     "fields": {
       "title": "The Warlock of Palladia",
       "author": "Matt Goss",
-      "genre": "Fantasy",
+      "genre": "FANTASY",
       "pages": "343",
       "price": "35",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -29,10 +29,10 @@
     "fields": {
       "title": "Where's Bella?",
       "author": "I.M. Wright",
-      "genre": "Children's",
+      "genre": "CHILDREN'S",
       "pages": "107",
       "price": "40",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -41,10 +41,10 @@
     "fields": {
       "title": "The Adventures of Raymundo",
       "author": "Ray Mazza",
-      "genre": "Children's",
+      "genre": "CHILDREN'S",
       "pages": "299",
       "price": "50",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -53,10 +53,10 @@
     "fields": {
       "title": "Murder in Pleasantview",
       "author": "Alexander Goth",
-      "genre": "Mystery",
+      "genre": "MYSTERY",
       "pages": "391",
       "price": "65",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -65,10 +65,10 @@
     "fields": {
       "title": "A Magnetic Attraction",
       "author": "Grant Rodiek",
-      "genre": "Trashy",
+      "genre": "TRASHY",
       "pages": "310",
       "price": "80",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -77,10 +77,10 @@
     "fields": {
       "title": "Commitment Issues",
       "author": "Harvey Williams",
-      "genre": "Drama",
+      "genre": "DRAMA",
       "pages": "407",
       "price": "130",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -89,10 +89,10 @@
     "fields": {
       "title": "Stragedy and Other Masterpieces",
       "author": "Gat Moss",
-      "genre": "Humor",
+      "genre": "HUMOR",
       "pages": "327",
       "price": "135",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -101,10 +101,10 @@
     "fields": {
       "title": "Zombies? Zombies!",
       "author": "Robert Mankowitz",
-      "genre": "Science Fiction",
+      "genre": "SCIENCE FICTION",
       "pages": "1198",
       "price": "180",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -113,10 +113,10 @@
     "fields": {
       "title": "Totally Preggers: An Expecting Mother's Tale",
       "author": "Eric Holmberg-Weidler",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "180",
       "price": "200",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -125,10 +125,10 @@
     "fields": {
       "title": "Unicorns for Audrey",
       "author": "S.C. Gastern",
-      "genre": "Fantasy",
+      "genre": "FANTASY",
       "pages": "408",
       "price": "210",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -137,10 +137,10 @@
     "fields": {
       "title": "Baby Incoming: Preparing with Vigilance",
       "author": "Eric Holmberg-Weidler",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "220",
       "price": "300",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -149,10 +149,10 @@
     "fields": {
       "title": "The Economy",
       "author": "James McLiteralson",
-      "genre": "Political memoir",
+      "genre": "POLITICAL MEMOIR",
       "pages": "405",
       "price": "310",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -161,10 +161,10 @@
     "fields": {
       "title": "How to Spin Plates",
       "author": "Hannon Grey",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "202",
       "price": "360",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -173,10 +173,10 @@
     "fields": {
       "title": "Game of Thorns",
       "author": "Guy le France",
-      "genre": "Mystery",
+      "genre": "MYSTERY",
       "pages": "309",
       "price": "405",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -185,10 +185,10 @@
     "fields": {
       "title": "The Crumplebottom Legacy: A Tale",
       "author": "Terri Ledonur",
-      "genre": "Historical",
+      "genre": "HISTORICAL",
       "pages": "301",
       "price": "480",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -197,10 +197,10 @@
     "fields": {
       "title": "I'm Still Cool",
       "author": "Leonard Prosper",
-      "genre": "Humor",
+      "genre": "HUMOR",
       "pages": "653",
       "price": "535",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -209,10 +209,10 @@
     "fields": {
       "title": "Llama Rights",
       "author": "Peter Siren",
-      "genre": "Historical",
+      "genre": "HISTORICAL",
       "pages": "438",
       "price": "610",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -221,10 +221,10 @@
     "fields": {
       "title": "On the Margins",
       "author": "Willy Magnusson",
-      "genre": "Satire",
+      "genre": "SATIRE",
       "pages": "212",
       "price": "780",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -233,10 +233,10 @@
     "fields": {
       "title": "The Point of Pointilism",
       "author": "Sebastian Humorsbane",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "235",
       "price": "875",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -245,10 +245,10 @@
     "fields": {
       "title": "Not Expecting Much",
       "author": "Charlie Richards",
-      "genre": "Vaudeville",
+      "genre": "VAUDEVILLE",
       "pages": "299",
       "price": "940",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -257,10 +257,10 @@
     "fields": {
       "title": "The Noble History of Socks",
       "author": "Linus Becket",
-      "genre": "Biography",
+      "genre": "BIOGRAPHY",
       "pages": "601",
       "price": "1000",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -269,10 +269,10 @@
     "fields": {
       "title": "Ballard's Ballads",
       "author": "Christina Ballard",
-      "genre": "Poetry",
+      "genre": "POETRY",
       "pages": "120",
       "price": "60",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -281,10 +281,10 @@
     "fields": {
       "title": "Plan 8 from Lunar Lakes",
       "author": "Woody Edwards",
-      "genre": "Science Fiction",
+      "genre": "SCIENCE FICTION",
       "pages": "280",
       "price": "70",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -293,10 +293,10 @@
     "fields": {
       "title": "Baron Graff Van Gould",
       "author": "Alexander Goth",
-      "genre": "Biography",
+      "genre": "BIOGRAPHY",
       "pages": "365",
       "price": "75",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -305,10 +305,10 @@
     "fields": {
       "title": "Why Do Vampires Suck?",
       "author": "Cole Stoker",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "162",
       "price": "100",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -317,10 +317,10 @@
     "fields": {
       "title": "The Sandwich Horror",
       "author": "Howard L.Phelps",
-      "genre": "Horror",
+      "genre": "HORROR",
       "pages": "184",
       "price": "100",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -329,10 +329,10 @@
     "fields": {
       "title": "True Fairy Tales",
       "author": "Chauncey Grimm",
-      "genre": "Children's",
+      "genre": "CHILDREN'S",
       "pages": "125",
       "price": "100",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -341,10 +341,10 @@
     "fields": {
       "title": "Logical Fallacies You Can Really Believe",
       "author": "Araceli Doucet",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "239",
       "price": "105",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -353,10 +353,10 @@
     "fields": {
       "title": "Germ Warfare",
       "author": "General Malaise",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "285",
       "price": "115",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -365,10 +365,10 @@
     "fields": {
       "title": "The Secret History of Lost Lemuria",
       "author": "Grigori Blavatsky",
-      "genre": "Historical",
+      "genre": "HISTORICAL",
       "pages": "234",
       "price": "120",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -377,10 +377,10 @@
     "fields": {
       "title": "The Silence of the Llamas",
       "author": "Harrison J.Thomas",
-      "genre": "Horror",
+      "genre": "HORROR",
       "pages": "396",
       "price": "120",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -389,10 +389,10 @@
     "fields": {
       "title": "Predictions Of The Future",
       "author": "I. M. Wright",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "473",
       "price": "140",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -401,10 +401,10 @@
     "fields": {
       "title": "Compendium of Curses",
       "author": "Hrithik Dixit",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "698",
       "price": "150",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -413,10 +413,10 @@
     "fields": {
       "title": "The Epic of the Tattered Trousers",
       "author": "Euripides",
-      "genre": "Poetry",
+      "genre": "POETRY",
       "pages": "600",
       "price": "150",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -425,10 +425,10 @@
     "fields": {
       "title": "Inappropriate Manor",
       "author": "Brittany Aaron",
-      "genre": "Mystery",
+      "genre": "MYSTERY",
       "pages": "572",
       "price": "155",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -437,10 +437,10 @@
     "fields": {
       "title": "How To Win At Videogames Without Really Trying",
       "author": "Henry Ryan",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "720",
       "price": "180",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -449,10 +449,10 @@
     "fields": {
       "title": "Hymn of Festive Stone",
       "author": "Elle M. Effayo",
-      "genre": "Poetry",
+      "genre": "POETRY",
       "pages": "210",
       "price": "70",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -461,10 +461,10 @@
     "fields": {
       "title": "Swish, Dribble, Swish",
       "author": "Derek D. Dublin",
-      "genre": "Sports",
+      "genre": "SPORTS",
       "pages": "275",
       "price": "80",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -473,10 +473,10 @@
     "fields": {
       "title": "The Vampire Blogs",
       "author": "J. L. Conners",
-      "genre": "Science Fiction",
+      "genre": "SCIENCE FICTION",
       "pages": "333",
       "price": "95",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -485,10 +485,10 @@
     "fields": {
       "title": "Zombies Ate My Plants",
       "author": "Herb Gardner",
-      "genre": "Fantasy",
+      "genre": "FANTASY",
       "pages": "360",
       "price": "110",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -497,10 +497,10 @@
     "fields": {
       "title": "Day of the PlantSims",
       "author": "Lucas Wyndham",
-      "genre": "Horror",
+      "genre": "HORROR",
       "pages": "390",
       "price": "120",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -509,10 +509,10 @@
     "fields": {
       "title": "The Player's Journey",
       "author": "Sabrina Star",
-      "genre": "Sports",
+      "genre": "SPORTS",
       "pages": "423",
       "price": "130",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -521,10 +521,10 @@
     "fields": {
       "title": "AutoBiology: Know Your Body",
       "author": "Lewis Rodgers",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "450",
       "price": "135",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -533,10 +533,10 @@
     "fields": {
       "title": "Taking the Ball Home",
       "author": "Francis P. Ruvin",
-      "genre": "Sports",
+      "genre": "SPORTS",
       "pages": "561",
       "price": "145",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -545,10 +545,10 @@
     "fields": {
       "title": "I Found This University",
       "author": "Hugo Vanderbilt",
-      "genre": "Historical",
+      "genre": "HISTORICAL",
       "pages": "600",
       "price": "160",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -557,10 +557,10 @@
     "fields": {
       "title": "What Do You Mean By Communication?",
       "author": "Martin Archibald",
-      "genre": "Non-Fiction",
+      "genre": "NON-FICTION",
       "pages": "720",
       "price": "170",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -569,10 +569,10 @@
     "fields": {
       "title": "The Story of A Game Developer",
       "author": "Henry Ryan",
-      "genre": "Biography",
+      "genre": "BIOGRAPHY",
       "pages": "1337",
       "price": "200",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -581,10 +581,10 @@
     "fields": {
       "title": "The Little Plumbot that Could",
       "author": "Jordan Jutur",
-      "genre": "Children's",
+      "genre": "CHILDREN'S",
       "pages": "123",
       "price": "450",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   },
   {
@@ -593,10 +593,10 @@
     "fields": {
       "title": "The Curious Incident of the Cats in the Day-Time",
       "author": "David Dall",
-      "genre": "Fiction",
+      "genre": "FICTION",
       "pages": "242",
       "price": "1200",
-      "availability": 1
+      "availability": "AVAILABLE"
     }
   }
 ]
