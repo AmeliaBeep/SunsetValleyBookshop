@@ -53,7 +53,6 @@ class Book(models.Model):
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name="orders")
     books = models.ManyToManyField(Book, through="OrderItem", related_name="orders")
-    total = models.PositiveIntegerField(default=0)
 
 
 
