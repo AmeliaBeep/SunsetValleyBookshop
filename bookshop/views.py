@@ -1,10 +1,10 @@
 import csv
 from django.db.models import F, IntegerField, Sum, Value
 from django.db.models.functions import Coalesce, Concat
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
-from bookshop.models import Customer, Order
-
+from bookshop.models import Customer, Order, OrderItem
+from django.core import serializers
 
 # Create your views here.
 
@@ -20,8 +20,17 @@ def view_home(request):
         },
     )
 
+def get_customer_data(request, customer_id):
+    customer_queryset = Customer.objects.filter(pk=customer_id)
+    orders_queryset = OrderItem.objects.filter(order__customer_id=customer_id)
+
+    customer = serializers.serialize("json", customer_queryset)
+    orders = serializers.serialize("json", orders_queryset)
+
+    return JsonResponse([customer, orders], safe=False)
+
 def view_customer(request, customer_id):
-    customer = get_object_or_404(Customer, pk=customer_id)
+    customer = get_object_or_404(request, customer_id)
 
     return render(
         request,
@@ -55,7 +64,3 @@ def get_all_transformed_orders(request):
     writer.writerows(transformed_data)
 
     return response
-
-    # writer.writerow(['pk', 'customerrid', 'customername', 'customeremail','total'])
-    # for order in transformed_data:
-    #     writer.writerow(order)
