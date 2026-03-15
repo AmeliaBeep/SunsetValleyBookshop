@@ -7,6 +7,7 @@
 
 <table>
     <tr>
+        <th>ID</th>
         <th>Name</th>
         <th>Orders made</th>
         <th>Status</th>
@@ -14,6 +15,7 @@
 
     {% for customer in customers %}
     <tr>
+        <td>{{ customer.id }}</td>
         <td><a href="{% url 'view_customer' customer.id %}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
         <td>{{ customer.orders.count }}</td>
         <td>{{ customer.status }}</td>
