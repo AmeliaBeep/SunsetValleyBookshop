@@ -24,7 +24,7 @@ def view_home(request):
 class CustomerLookupMixin:
     def get_customer(self, customer_id):
         return get_object_or_404(Customer, pk=customer_id)
-    
+
     def build_customer_payload(self, customer_id):
         customer = self.get_customer(customer_id)
         payload = {
@@ -35,7 +35,7 @@ class CustomerLookupMixin:
             "status": customer.status,
         }
         return payload
-    
+
     def build_orders_payload(self, customer_id):
         orders = (
             Order.objects
@@ -63,7 +63,7 @@ class CustomerLookupMixin:
                 "order_items": order_items,
             }
 
-        return payload  
+        return payload
 
 
 class CustomerDataView(CustomerLookupMixin, View):

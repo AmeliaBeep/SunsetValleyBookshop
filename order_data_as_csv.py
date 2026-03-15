@@ -42,7 +42,7 @@ def write_csv(orders, output_file: Path) -> None:
         writer = csv.writer(f)
         writer.writerow([
             "order_id", "customer_id", "customer_name", "customer_email", "customer_status",
-            "book_id", "book_title", "book_author", "quantity", "unit_price", "line_total", 
+            "book_id", "book_title", "book_author", "quantity", "unit_price", "line_total",
             "order_total",
         ])
 
