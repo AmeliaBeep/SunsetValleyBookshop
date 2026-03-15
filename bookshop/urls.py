@@ -2,8 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.view_home, name='home'),
-    path('get-customer/<int:customer_id>', views.get_customer_data, name='get_customer_data'),
-    path('view-customer/<int:customer_id>', views.view_customer, name='view_customer'),
-    path('get-all-transformed-orders', views.get_all_transformed_orders, name='get_all_transformed_orders')
+    path("", views.view_home, name="home"),
+    path("get-customer/<int:customer_id>", views.CustomerDataView.as_view(), name="get_customer_data"),
+    path("view-customer/<int:customer_id>", views.CustomerDetailView.as_view(), name="view_customer"),
 ]
