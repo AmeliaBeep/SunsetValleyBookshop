@@ -40,27 +40,3 @@ def view_customer(request, customer_id):
         }
     )
 
-def get_all_transformed_orders(request):
-    transformed_data = (
-        Order.objects.filter(customer__status="ACTIVE")
-        .prefetch_related('customer')
-        .annotate(
-            customer_name=Concat('customer__first_name', Value(" "), 'customer__last_name'),
-            customer_email=F('customer__email'),
-            total=Coalesce(
-                Sum(F("items__quantity") * F("items__book__price"), output_field=IntegerField()),
-                0,
-            ),
-        )
-    ).values_list('pk', 'customer__id', 'customer_name', 'customer_email', 'total')
-
-    response = HttpResponse(
-        content_type="text/csv",
-        headers={"Content-Disposition": 'attachment; filename="transformed_order_data.csv"'},
-    )
-    
-    writer = csv.writer(response)
-    writer.writerow(['order_id', 'customer_id', 'customer_name', 'customer_email','total'])
-    writer.writerows(transformed_data)
-
-    return response

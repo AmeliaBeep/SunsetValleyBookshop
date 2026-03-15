@@ -1,17 +1,14 @@
+import csv
+import os
+import sys
 import argparse
+import django
 from pathlib import Path
-from urllib.error import HTTPError, URLError
-from urllib.request import urlopen
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Call the transformed orders endpoint and save CSV to Downloads."
-    )
-    parser.add_argument(
-        "--base-url",
-        default="http://127.0.0.1:8000",
-        help="Base URL where the Django app is running.",
+        description="Export order data with order items and books to CSV."
     )
     parser.add_argument(
         "--output",
@@ -21,29 +18,61 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def fetch_csv(base_url: str) -> bytes:
-    endpoint = f"{base_url.rstrip('/')}/get-all-transformed-orders"
-    with urlopen(endpoint, timeout=30) as response:
-        if response.status != 200:
-            raise RuntimeError(f"Request failed with status {response.status}: {endpoint}")
-        return response.read()
+def setup_django() -> None:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+    django.setup()
 
 
-def write_csv(csv_bytes: bytes, output_file: Path) -> None:
+def fetch_orders():
+    from bookshop.models import Order
+
+    return (
+        Order.objects.filter(customer__status="ACTIVE")
+        .select_related("customer")
+        .prefetch_related("items__book")
+        .order_by("pk")
+    )
+
+
+def write_csv(orders, output_file: Path) -> None:
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    output_file.write_bytes(csv_bytes)
+
+    with output_file.open("w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            "order_id", "customer_id", "customer_name", "customer_email",
+            "book_title", "book_author", "quantity", "unit_price", "line_total", "order_total",
+        ])
+
+        for order in orders:
+            customer = order.customer
+            customer_name = f"{customer.first_name} {customer.last_name}"
+            items = list(order.items.all())
+            order_total = sum(item.quantity * item.book.price for item in items)
+
+            for item in items:
+                writer.writerow([
+                    order.pk,
+                    customer.pk,
+                    customer_name,
+                    customer.email,
+                    item.book.title,
+                    item.book.author,
+                    item.quantity,
+                    item.book.price,
+                    item.quantity * item.book.price,
+                    order_total,
+                ])
 
 
 def main() -> None:
     args = parse_args()
     output_file = Path(args.output)
 
-    try:
-        csv_bytes = fetch_csv(args.base_url)
-        write_csv(csv_bytes, output_file)
-    except (HTTPError, URLError, RuntimeError) as exc:
-        raise SystemExit(f"CSV export failed: {exc}") from exc
-
+    setup_django()
+    orders = fetch_orders()
+    write_csv(orders, output_file)
     print(f"CSV saved to {output_file}")
 
 
