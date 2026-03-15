@@ -41,15 +41,17 @@ def write_csv(orders, output_file: Path) -> None:
     with output_file.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([
-            "order_id", "customer_id", "customer_name", "customer_email",
-            "book_title", "book_author", "quantity", "unit_price", "line_total", "order_total",
+            "order_id", "customer_id", "customer_name", "customer_email", "customer_status",
+            "book_id", "book_title", "book_author", "quantity", "unit_price", "line_total", 
+            "order_total",
         ])
 
         for order in orders:
             customer = order.customer
             customer_name = f"{customer.first_name} {customer.last_name}"
             items = list(order.items.all())
-            order_total = sum(item.quantity * item.book.price for item in items)
+            order_total = sum(
+                item.quantity * item.book.price for item in items)
 
             for item in items:
                 writer.writerow([
@@ -57,6 +59,8 @@ def write_csv(orders, output_file: Path) -> None:
                     customer.pk,
                     customer_name,
                     customer.email,
+                    customer.status,
+                    item.book.id,
                     item.book.title,
                     item.book.author,
                     item.quantity,
