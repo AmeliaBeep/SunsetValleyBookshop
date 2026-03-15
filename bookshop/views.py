@@ -8,19 +8,19 @@ from bookshop.models import Customer, Order
 
 # Create your views here.
 
-def view_orders(request):
+def view_home(request):
 
-    order_list = Order.objects.all()
+    customer_list = Customer.objects.all()
 
     return render(
         request,
-        "bookshop/orders.html",
+        "bookshop/home.html",
         {
-            "order_list": order_list,
+            "customers": customer_list,
         },
     )
 
-def view_customer_data(request, customer_id):
+def view_customer(request, customer_id):
     customer = get_object_or_404(Customer, pk=customer_id)
 
     return render(

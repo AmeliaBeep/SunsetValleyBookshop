@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<h1>All customers</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Orders made</th>
+        <th>Status</th>
+    </tr>
+
+    {% for customer in customers %}
+    <tr>
+        <td><a href="{% url 'view_customer' customer.id %}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
+        <td>{{ customer.orders.count }}</td>
+        <td>{{ customer.status }}</td>
+    {% endfor %}
+
+</table>
+
+
+
+
+
+{% endblock %}
