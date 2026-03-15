@@ -1,5 +1,7 @@
-from django.db.models import CharField, F, IntegerField, Sum, Value, Prefetch
+import csv
+from django.db.models import F, IntegerField, Sum, Value
 from django.db.models.functions import Coalesce, Concat
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from bookshop.models import Customer, Order
 
@@ -30,11 +32,6 @@ def view_customer_data(request, customer_id):
     )
 
 def get_all_transformed_orders(request):
-    customers=Customer.objects.filter(status='ACTIVE')
-
-
-    
-
     transformed_data = (
         Order.objects.filter(customer__status="ACTIVE")
         .prefetch_related('customer')
@@ -46,12 +43,19 @@ def get_all_transformed_orders(request):
                 0,
             ),
         )
-    ).values('pk', 'customer__id', 'customer_name', 'customer_email', 'total')
+    ).values_list('pk', 'customer__id', 'customer_name', 'customer_email', 'total')
 
-    return render(
-        request,
-        "bookshop/orders.html",
-        {
-            "transformed_customers": transformed_data,
-        },
+    response = HttpResponse(
+        content_type="text/csv",
+        headers={"Content-Disposition": 'attachment; filename="transformed_order_data.csv"'},
     )
+    
+    writer = csv.writer(response)
+    writer.writerow(['order_id', 'customer_id', 'customer_name', 'customer_email','total'])
+    writer.writerows(transformed_data)
+
+    return response
+
+    # writer.writerow(['pk', 'customerrid', 'customername', 'customeremail','total'])
+    # for order in transformed_data:
+    #     writer.writerow(order)
