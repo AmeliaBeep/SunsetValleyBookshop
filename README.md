@@ -66,6 +66,12 @@ Visiting the server's landing page will display all customers. Click on any name
   <img src="assets/images/view_customer.png" alt="Entity Delationship Diagram of how the Customer, Order, Order Item and Book models relate" width="70%">
 </div>
 
+### Using the ETL script
+
+Run the script using
+```
+python3 order_data_as_csv
+```
 
 ## Choices and Reasoning
 
