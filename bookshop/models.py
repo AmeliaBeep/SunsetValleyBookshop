@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F, Sum, IntegerField, ExpressionWrapper
 
 # Create your models here.
 
@@ -13,6 +14,9 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=20)  
     email = models.EmailField(max_length=60)
     status = models.CharField(max_length=20, choices=CUSTOMER_STATUS_CHOICES)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class Book(models.Model):
@@ -49,11 +53,25 @@ class Book(models.Model):
     price = models.PositiveIntegerField()
     availability = models.CharField(max_length=20, choices=BOOK_AVAILABILITY)
 
+    def __str__(self):
+        return f"{self.title}"
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT, related_name="orders")
     books = models.ManyToManyField(Book, through="OrderItem", related_name="orders")
 
+    def calculate_price(self) -> int:
+        line_total = ExpressionWrapper(
+            F("quantity") * F("book__price"),
+            output_field=IntegerField(),
+        )
+
+        result = self.items.aggregate(total=Sum(line_total))
+        return result["total"] or 0
+
+    def __str__(self):
+        return f"#{self.pk} (§{self.calculate_price()}) - {self.customer}"
 
 
 class OrderItem(models.Model):
@@ -66,3 +84,6 @@ class OrderItem(models.Model):
             models.UniqueConstraint(fields=["order", "book"], name="unique_book_per_order"),
             models.CheckConstraint(check=models.Q(quantity__gte=1), name="quantity_at_least_one"),
         ]
+
+    def __str__(self):
+        return f"{self.book} ({self.quantity})"
