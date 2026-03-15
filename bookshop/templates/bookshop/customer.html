@@ -34,10 +34,10 @@
 <section>
     <h2>Orders</h2>
 
-    {% for order in customer.orders.all %}
+    {% for order_id, order in orders.items %}
     
     <details>
-        <summary>Order {{order.id}} details</summary>
+        <summary>Order {{ order.order_id }} details</summary>
         <table>
             <tr>
                 <th>Book</th>
@@ -45,15 +45,20 @@
                 <th>Unit</th>
                 <th>Total</th>
             </tr>
-            {% for item in order.items.all %}
+            {% for item_id, item in order.order_items.items %}
             <tr>
-                <td>{{item.book.title}}</td>
-                <td>{{item.quantity}}x</td>
-                <td>{{item.book.price}}</td>
-                <td>{{item.book.price|multiply:item.quantity}}</td>
+                <td>{{ item.book_title }}</td>
+                <td>{{ item.quantity }}x</td>
+                <td>{{ item.book_price }}</td>
+                <td>{{ item.line_total }}</td>
             </tr>
             {% endfor %}
-            <tr></tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ order.total }}</td>
+            </tr>
 
         </table>
     </details>

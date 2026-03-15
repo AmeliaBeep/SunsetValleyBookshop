@@ -44,22 +44,25 @@ class CustomerLookupMixin:
             .prefetch_related("items__book")
         )
 
-        payload = {
-            str(order.pk): {
-                "order_id": order.pk,
-                "order_items": {
-                    str(item.pk): {
-                        "book_id": item.book_id,
-                        "book_title": item.book.title,
-                        "quantity": item.quantity,
-                        "unit_price": item.book.price,
-                        "line_total": item.quantity * item.book.price,
-                    }
-                    for item in order.items.all()
-                },
+        payload = {}
+        for order in orders:
+            order_items = {
+                str(item.pk): {
+                    "book_id": item.book_id,
+                    "book_title": item.book.title,
+                    "quantity": item.quantity,
+                    "unit_price": item.book.price,
+                    "line_total": item.quantity * item.book.price,
+                }
+                for item in order.items.all()
             }
-            for order in orders
-        }
+
+            payload[str(order.pk)] = {
+                "order_id": order.pk,
+                "total": sum(item["line_total"] for item in order_items.values()),
+                "order_items": order_items,
+            }
+
         return payload  
 
 
@@ -67,8 +70,6 @@ class CustomerDataView(CustomerLookupMixin, View):
     def get(self, request, customer_id):
         customer = self.build_customer_payload(customer_id)
         orders = self.build_orders_payload(customer_id)
-        
-
         data = {
             "customer": customer,
             "orders": orders,
@@ -81,10 +82,12 @@ class CustomerDetailView(CustomerLookupMixin, View):
 
     def get(self, request, customer_id):
         customer = self.get_customer(customer_id)
+        orders = self.build_orders_payload(customer_id)
         return render(
             request,
             self.template_name,
             {
-                "customer": customer
+                "customer": customer,
+                "orders": orders,
             },
         )
