@@ -4,22 +4,11 @@ from django.db.models.functions import Coalesce, Concat
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import View
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from bookshop.models import Customer, Order, OrderItem
 from django.core import serializers
 
 # Create your views here.
-
-
-def view_home(request):
-    customer_list = Customer.objects.all()
-    return render(
-        request,
-        "bookshop/home.html",
-        {
-            "customers": customer_list,
-        },
-    )
-
 
 class CustomerLookupMixin:
     def get_customer(self, customer_id):
@@ -64,30 +53,34 @@ class CustomerLookupMixin:
             }
 
         return payload
+class CustomerListView(ListView):
+    model = Customer
+    template_name = "bookshop/customer_list"
+    context_object_name = "customers"
+    paginate_by = 20
 
 
-class CustomerDataView(CustomerLookupMixin, View):
-    def get(self, request, customer_id):
-        customer = self.build_customer_payload(customer_id)
-        orders = self.build_orders_payload(customer_id)
-        data = {
-            "customer": customer,
-            "orders": orders,
-        }
-        return JsonResponse(data)
-
-
-class CustomerDetailView(CustomerLookupMixin, View):
+class CustomerDetailView(DetailView):
+    model = Customer
     template_name = "bookshop/customer.html"
-
-    def get(self, request, customer_id):
-        customer = self.get_customer(customer_id)
-        orders = self.build_orders_payload(customer_id)
-        return render(
-            request,
-            self.template_name,
-            {
-                "customer": customer,
-                "orders": orders,
-            },
+    context_object_name = "customer"
+    
+    def get_context_data(self, **kwargs) -> dict[str, any]:
+        context = super(CustomerDetailView, self).get_context_data(**kwargs)
+        #context["customer"] = Customer.objects.filter(pk=self.object.pk)
+        context["orders"] = (
+            Order.objects.filter(customer=self.object.pk)
+            .select_related("customer")
+            .prefetch_related("items__book")
         )
+        return context  
+
+
+    
+# class CustomerCreateView
+
+# OrderCreateView
+
+# OrderUpdateView
+
+# OrderDeleteView

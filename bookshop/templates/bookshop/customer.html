@@ -5,7 +5,7 @@
 <!-- customer details -->
 <section>
     <h1>{{ customer.first_name}} {{ customer.last_name }}</h1>
-    <a href="{% url 'home' %}">Return to full customer list</a>
+    <a href="{% url 'customer_list_view' %}">Return to full customer list</a>
     <h2>Customer details</h2>
     <table>
         <tr>
@@ -33,7 +33,7 @@
 <section>
     <h2>Orders</h2>
 
-    {% for order_id, order in orders.items %}
+    {% for order in orders %}
     
     <details>
         <summary>Order {{ order.order_id }} details</summary>
