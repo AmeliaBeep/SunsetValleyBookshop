@@ -67,10 +67,8 @@ class CustomerDetailView(DetailView):
     
     def get_context_data(self, **kwargs) -> dict[str, any]:
         context = super(CustomerDetailView, self).get_context_data(**kwargs)
-        #context["customer"] = Customer.objects.filter(pk=self.object.pk)
         context["orders"] = (
             Order.objects.filter(customer=self.object.pk)
-            .select_related("customer")
             .prefetch_related("items__book")
         )
         return context  

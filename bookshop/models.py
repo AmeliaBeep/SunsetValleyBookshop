@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import F, Sum, IntegerField, ExpressionWrapper
+from django.db.models import F, PositiveIntegerField, Sum, IntegerField, ExpressionWrapper
 
 # Create your models here.
 
@@ -51,7 +51,7 @@ class Book(models.Model):
     author = models.CharField(max_length=40)
     genre = models.CharField(max_length=40, choices=BOOK_GENRE_CHOICES)
     pages = models.PositiveIntegerField()
-    price = models.PositiveIntegerField()
+    unit_price = models.PositiveIntegerField()
     availability = models.CharField(max_length=20, choices=BOOK_AVAILABILITY)
 
     def __str__(self):
@@ -63,18 +63,15 @@ class Order(models.Model):
         Customer, on_delete=models.PROTECT, related_name="orders")
     books = models.ManyToManyField(
         Book, through="OrderItem", related_name="orders")
+    total_price = models.PositiveIntegerField(default=0)
 
-    def calculate_price(self) -> int:
-        line_total = ExpressionWrapper(
-            F("quantity") * F("book__price"),
-            output_field=IntegerField(),
-        )
-
-        result = self.items.aggregate(total=Sum(line_total))
-        return result["total"] or 0
+    def save(self, *args, **kwargs):
+        # Keep line_total in sync with quantity and current book price
+        self.total_price = sum(item.line_total for item in self.items.all())
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"#{self.pk} (§{self.calculate_price()}) - {self.customer}"
+        return f"#{self.pk} (§{self.total_price}) - {self.customer}"
 
 
 class OrderItem(models.Model):
@@ -83,6 +80,12 @@ class OrderItem(models.Model):
     book = models.ForeignKey(
         Book, on_delete=models.PROTECT, related_name="order_items")
     quantity = models.PositiveIntegerField(default=1)
+    line_total = models.PositiveIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        # Keep line_total in sync with quantity and current book price
+        self.line_total = self.quantity * self.book.unit_price
+        super().save(*args, **kwargs)
 
     class Meta:
         constraints = [

@@ -34,9 +34,9 @@
     <h2>Orders</h2>
 
     {% for order in orders %}
-    
+
     <details>
-        <summary>Order {{ order.order_id }} details</summary>
+        <summary>Order {{ order.id }} details</summary>
         <table>
             <tr>
                 <th>Book</th>
@@ -44,11 +44,11 @@
                 <th>Unit</th>
                 <th>Total</th>
             </tr>
-            {% for item_id, item in order.order_items.items %}
+            {% for item in order.items.all %}
             <tr>
-                <td>{{ item.book_title }}</td>
+                <td>{{ item.book.title }}</td>
                 <td>{{ item.quantity }}x</td>
-                <td>{{ item.unit_price }}</td>
+                <td>{{ item.book.unit_price }}</td>
                 <td>{{ item.line_total }}</td>
             </tr>
             {% endfor %}
@@ -56,7 +56,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{ order.total }}</td>
+                <td>{{ order.total_price }}</td>
             </tr>
 
         </table>
