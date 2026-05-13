@@ -4,9 +4,11 @@ from django.db.models.functions import Coalesce, Concat
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import View
-from django.views.generic import ListView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+from bookshop.forms import OrderForm, OrderItemForm
 from bookshop.models import Customer, Order, OrderItem
 from django.core import serializers
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -74,10 +76,26 @@ class CustomerDetailView(DetailView):
         return context  
 
 
-    
-# class CustomerCreateView
+class OrderCreateView(View):
+    order_form = OrderForm()
+    order_item_form = OrderItemForm()
+    template_name = "bookshop/order_create.html"
 
-# OrderCreateView
+    def get(self, request):
+        return render(
+            request,
+            self.template_name,
+            {
+                "order_form": self.order_form,
+                "order_item_form": self.order_item_form,
+            },
+        )
+
+
+
+
+
+
 
 # OrderUpdateView
 
