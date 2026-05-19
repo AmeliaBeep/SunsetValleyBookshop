@@ -5,7 +5,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-from bookshop.forms import OrderForm, OrderItemForm
+from bookshop.forms import OrderForm, OrderItemForm, OrderItemFormSet
 from bookshop.models import Customer, Order, OrderItem
 from django.core import serializers
 from django.urls import reverse_lazy
@@ -78,7 +78,7 @@ class CustomerDetailView(DetailView):
 
 class OrderCreateView(View):
     order_form = OrderForm()
-    order_item_form = OrderItemForm()
+    order_item_formset = OrderItemFormSet(queryset=OrderItem.objects.none())
     template_name = "bookshop/order_create.html"
 
     def get(self, request):
@@ -87,9 +87,10 @@ class OrderCreateView(View):
             self.template_name,
             {
                 "order_form": self.order_form,
-                "order_item_form": self.order_item_form,
+                "order_item_formset": self.order_item_formset,
             },
         )
+
 
 
 
