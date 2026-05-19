@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+<form method="POST" id="order-form">
+{% csrf_token %}
+
+{{ order_form.as_p }}
+
+{{ order_item_formset.management_form }}
+<div id="order_item_formset">
+        {% for form in order_item_formset %}
+        <div class="form-row">
+                {{ form }}
+                <button type="button" class="remove-form">X</button>
+        </div>
+        {% endfor %}
+</div>
+<button type="button" id="add-model-form">Add new book</button>
+<br>
+<br>
+<button type="submit">Save Order</button>
+</form>
+
+<script>
+$(document).ready(function() {
+        // Handling Model Formset
+        let modelFormIdx = {{ order_item_formset.total_form_count }};
+        $('#add-model-form').click(function() {
+        $('#order_item_formset').append($('#order_item_formset .form-row:last').clone().find('select, input').each(function() {
+                let name = $(this).attr('name').replace(/-\d+-/, '-' + modelFormIdx + '-');
+                let id = $(this).attr('id').replace(/-\d+-/, '-' + modelFormIdx + '-');
+                $(this).attr('name', name).val('');
+                $(this).attr('id', id).val('');
+        }).end().find('label').each(function() {
+                let forat = $(this).attr('for').replace(/-\d+-/, '-' + modelFormIdx + '-');
+                $(this).attr('for', forat).val('');
+        }).end().find('input[name$=-id]').val('').end().find('.remove-form').show().end());
+        modelFormIdx++;
+        $('#id_form-TOTAL_FORMS').val(modelFormIdx);
+        });
+
+        $('#order_item_formset').on('click', '.remove-form', function() {
+        $(this).closest('.form-row').remove();
+        modelFormIdx--;
+        $('#id_form-TOTAL_FORMS').val(modelFormIdx);
+        });
+
+        $('.remove-form').hide(); // Hide remove button for initial forms
+});
+</script>
+
+{% endblock %}

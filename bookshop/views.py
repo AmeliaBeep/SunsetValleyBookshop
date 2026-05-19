@@ -77,17 +77,17 @@ class CustomerDetailView(DetailView):
 
 
 class OrderCreateView(View):
-    order_form = OrderForm()
-    order_item_formset = OrderItemFormSet(queryset=OrderItem.objects.none())
     template_name = "bookshop/order_create.html"
 
     def get(self, request):
+        order_form = OrderForm()
+        order_item_formset = OrderItemFormSet(queryset=OrderItem.objects.none())
         return render(
             request,
             self.template_name,
             {
-                "order_form": self.order_form,
-                "order_item_formset": self.order_item_formset,
+                "order_form": order_form,
+                "order_item_formset": order_item_formset,
             },
         )
     
@@ -105,3 +105,39 @@ class OrderCreateView(View):
 
         return HttpResponseRedirect(reverse('customer_list_view'))
     
+class OrderUpdateView(View):
+    template_name = "bookshop/order_update.html"
+    
+    def get(self, request, pk):
+        order_item_qs = OrderItem.objects.filter(order=pk)
+        order_instance = Order.objects.get(pk=pk)
+
+        order_form = OrderForm(instance=order_instance)
+        order_item_formset = OrderItemFormSet(queryset=order_item_qs)
+        return render(
+            request,
+            self.template_name,
+            {
+                "order_form": order_form,
+                "order_item_formset": order_item_formset,
+            },
+        )
+
+    def post(self, request, pk):
+        order_item_qs = OrderItem.objects.filter(order=pk)
+        order_instance = Order.objects.get(pk=pk)
+
+        order_form = OrderForm(request.POST, instance=order_instance)
+        order_item_formset = OrderItemFormSet(request.POST, queryset=order_item_qs)
+
+        if order_item_formset.is_valid() and order_form.is_valid():
+            order = order_form.save()
+            order_items = order_item_formset.save(commit=False)
+            for item in order_items:
+                item.order = order
+                item.save()
+            order.save()
+            return HttpResponseRedirect(reverse('customer_list_view'))
+
+        return HttpResponseRedirect(reverse(d))
+
