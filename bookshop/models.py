@@ -67,7 +67,8 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         # Keep line_total in sync with quantity and current book price
-        self.total_price = sum(item.line_total for item in self.items.all())
+        if self.pk: 
+            self.total_price = sum(item.line_total for item in self.items.all())
         super().save(*args, **kwargs)
 
     def __str__(self):

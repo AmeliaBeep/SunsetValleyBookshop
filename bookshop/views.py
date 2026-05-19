@@ -1,14 +1,14 @@
 import csv
 from django.db.models import F, IntegerField, Sum, Value
 from django.db.models.functions import Coalesce, Concat
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from bookshop.forms import OrderForm, OrderItemForm, OrderItemFormSet
 from bookshop.models import Customer, Order, OrderItem
 from django.core import serializers
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 
 # Create your views here.
 
@@ -90,14 +90,18 @@ class OrderCreateView(View):
                 "order_item_formset": self.order_item_formset,
             },
         )
+    
+    def post(self, request):
+        order_form = OrderForm(request.POST)
+        order_item_formset = OrderItemFormSet(request.POST)
 
+        if order_item_formset.is_valid() and order_form.is_valid():
+            order = order_form.save()
+            order_items = order_item_formset.save(commit=False)
+            for item in order_items:
+                item.order = order
+                item.save()
+            order.save()
 
-
-
-
-
-
-
-# OrderUpdateView
-
-# OrderDeleteView
+        return HttpResponseRedirect(reverse('customer_list_view'))
+    

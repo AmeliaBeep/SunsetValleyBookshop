@@ -4,7 +4,7 @@
 {% load static %}
 
 
-<form method="" id="order-form">
+<form method="POST" id="order-form">
 {% csrf_token %}
 
 {{ order_form.as_p }}
@@ -27,11 +27,16 @@
 <script>
 $(document).ready(function() {
         // Handling Model Formset
-        let modelFormIdx = {{ order_item_formset.total_form_count|add:"-1" }};
+        let modelFormIdx = {{ order_item_formset.total_form_count }};
         $('#add-model-form').click(function() {
-        $('#order_item_formset').append($('#order_item_formset .form-row:last').clone().find('input').each(function() {
+        $('#order_item_formset').append($('#order_item_formset .form-row:last').clone().find('select, input').each(function() {
                 let name = $(this).attr('name').replace(/-\d+-/, '-' + modelFormIdx + '-');
+                let id = $(this).attr('id').replace(/-\d+-/, '-' + modelFormIdx + '-');
                 $(this).attr('name', name).val('');
+                $(this).attr('id', id).val('');
+        }).end().find('label').each(function() {
+                let forat = $(this).attr('for').replace(/-\d+-/, '-' + modelFormIdx + '-');
+                $(this).attr('for', forat).val('');
         }).end().find('input[name$=-id]').val('').end().find('.remove-form').show().end());
         modelFormIdx++;
         $('#id_form-TOTAL_FORMS').val(modelFormIdx);
