@@ -11,12 +11,6 @@
 
 {{ order_item_formset.management_form }}
 <div id="order_item_formset">
-        {% for form in order_item_formset %}
-        <div class="form-row">
-                {{ form }}
-                <button type="button" class="remove-form">X</button>
-        </div>
-        {% endfor %}
 </div>
 <button type="button" id="add-model-form">Add new book</button>
 <br>
@@ -24,32 +18,31 @@
 <button type="submit">Save Order</button>
 </form>
 
+<div id="empty_form" style="display:none">
+    <div class='form-row' id='form-row-__prefix__'>
+        {{ order_item_formset.empty_form }}
+        <button type="button" class="remove-form">X</button>
+    </div>
+</div>
 <script>
 $(document).ready(function() {
-        // Handling Model Formset
-        let modelFormIdx = {{ order_item_formset.total_form_count }};
-        $('#add-model-form').click(function() {
-        $('#order_item_formset').append($('#order_item_formset .form-row:last').clone().find('select, input').each(function() {
-                let name = $(this).attr('name').replace(/-\d+-/, '-' + modelFormIdx + '-');
-                let id = $(this).attr('id').replace(/-\d+-/, '-' + modelFormIdx + '-');
-                $(this).attr('name', name).val('');
-                $(this).attr('id', id).val('');
-        }).end().find('label').each(function() {
-                let forat = $(this).attr('for').replace(/-\d+-/, '-' + modelFormIdx + '-');
-                $(this).attr('for', forat).val('');
-        }).end().find('input[name$=-id]').val('').end().find('.remove-form').show().end());
-        modelFormIdx++;
-        $('#id_form-TOTAL_FORMS').val(modelFormIdx);
-        });
+    let form_index = 0
+    $('#add-model-form').click(function() {
+        let form_index = $('#id_form-TOTAL_FORMS').val();
+        $('#order_item_formset .form-row:last button').hide()
+        $('#order_item_formset').append($('#empty_form').html().replace(/__prefix__/g, form_index));
+        $('#id_form-TOTAL_FORMS').val(parseInt(form_index) + 1);
+    });
 
-        $('#order_item_formset').on('click', '.remove-form', function() {
+    $('#order_item_formset').on('click', '.remove-form', function () {
         $(this).closest('.form-row').remove();
-        modelFormIdx--;
-        $('#id_form-TOTAL_FORMS').val(modelFormIdx);
-        });
-
-        $('.remove-form').hide(); // Hide remove button for initial forms
+        let form_index = $('#id_form-TOTAL_FORMS').val();
+        $('#id_form-TOTAL_FORMS').val(parseInt(form_index) - 1);
+        $('#order_item_formset .form-row:last button').show()
 });
+});
+
+
 </script>
 
 {% endblock %}
