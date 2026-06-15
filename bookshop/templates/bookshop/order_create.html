@@ -26,10 +26,12 @@
 </div>
 <script>
 $(document).ready(function() {
-    let form_index = 0
+    $('#id_form-__prefix__-DELETE').remove();
+    $("label[for='id_form-__prefix__-DELETE']").remove();
+    
     $('#add-model-form').click(function() {
         let form_index = $('#id_form-TOTAL_FORMS').val();
-        $('#order_item_formset .form-row:last button').hide()
+        $('#order_item_formset .form-row:last button').hide();
         $('#order_item_formset').append($('#empty_form').html().replace(/__prefix__/g, form_index));
         $('#id_form-TOTAL_FORMS').val(parseInt(form_index) + 1);
     });

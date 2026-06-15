@@ -13,4 +13,4 @@ class OrderItemForm(forms.ModelForm):
         model = OrderItem
         fields = ('book', 'quantity',)
 
-OrderItemFormSet = modelformset_factory(OrderItem, form=OrderItemForm, extra=0)
+OrderItemFormSet = modelformset_factory(OrderItem, form=OrderItemForm, extra=0, can_delete=True)
