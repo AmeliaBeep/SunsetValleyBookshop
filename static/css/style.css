@@ -1,0 +1,271 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--accent: rgba(101, 194, 202, 1);
+	--accent-dark: rgba(49, 121, 127, 1);
+	--accent-soft: rgba(101, 194, 202, 0.14);
+	--text: #163236;
+	--muted: #5d7276;
+	--surface: #ffffff;
+	--page: #f4f9fa;
+	--border: rgba(22, 50, 54, 0.12);
+	--shadow: 0 12px 30px rgba(22, 50, 54, 0.08);
+}
+
+html {
+	background: linear-gradient(180deg, #eff8f9 0%, #f7fbfb 100%);
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	color: var(--text);
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.5;
+	background:
+		radial-gradient(circle at top right, rgba(101, 194, 202, 0.16), transparent 28%),
+		radial-gradient(circle at left top, rgba(101, 194, 202, 0.08), transparent 22%),
+		var(--page);
+}
+
+main {
+	width: min(1100px, calc(100% - 2rem));
+	margin: 0 auto;
+	padding: 2rem 0 3rem;
+}
+
+section,
+form,
+table,
+details {
+	background: var(--surface);
+}
+
+section,
+form {
+	border: 1px solid var(--border);
+	border-radius: 16px;
+	box-shadow: var(--shadow);
+	padding: 1.25rem;
+	margin-bottom: 1.25rem;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0 0 0.75rem;
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+}
+
+h1 {
+	font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+h2 {
+	font-size: clamp(1.1rem, 2vw, 1.5rem);
+	color: var(--text);
+}
+
+p,
+label,
+td,
+th,
+summary,
+a,
+button,
+input,
+select,
+textarea {
+	font-size: 0.98rem;
+}
+
+a {
+	color: var(--accent-dark);
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.18em;
+}
+
+a:hover {
+	color: #245c60;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	overflow: hidden;
+	margin: 0.75rem 0 1rem;
+}
+
+th,
+td {
+	padding: 0.8rem 0.9rem;
+	border-bottom: 1px solid var(--border);
+	text-align: left;
+	vertical-align: top;
+}
+
+th {
+	background: var(--accent-soft);
+	color: var(--text);
+	font-weight: 700;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+details {
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 0.9rem 1rem;
+	margin: 0.9rem 0;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+summary {
+	cursor: pointer;
+	font-weight: 700;
+	color: var(--text);
+}
+
+form p,
+.form-row {
+	margin: 0 0 1rem;
+}
+
+input,
+select,
+textarea {
+	width: 100%;
+	padding: 0.8rem 0.9rem;
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	background: #fff;
+	color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 2px solid rgba(101, 194, 202, 0.35);
+	border-color: var(--accent);
+}
+
+button,
+.button,
+input[type="submit"] {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+	width: auto;
+	padding: 0.8rem 1rem;
+	border: 1px solid transparent;
+	border-radius: 999px;
+	background: var(--accent);
+	color: #0f2d31;
+	font-weight: 700;
+	cursor: pointer;
+	text-decoration: none;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+button:hover,
+.button:hover,
+input[type="submit"]:hover {
+	background: #89d5da;
+	box-shadow: 0 10px 20px rgba(101, 194, 202, 0.22);
+	transform: translateY(-1px);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+	outline: 3px solid rgba(101, 194, 202, 0.35);
+	outline-offset: 2px;
+}
+
+.remove-form,
+button.remove-form {
+	background: #eef5f5;
+	color: var(--muted);
+	border-color: var(--border);
+}
+
+.remove-form:hover,
+button.remove-form:hover {
+	background: #e1ecec;
+	box-shadow: none;
+}
+
+#order-form {
+	max-width: 760px;
+}
+
+#order_item_formset .form-row {
+	padding: 1rem;
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	background: linear-gradient(180deg, #ffffff 0%, #fafdfe 100%);
+}
+
+#order_item_formset .form-row + .form-row {
+	margin-top: 0.85rem;
+}
+
+#empty_form {
+	display: none;
+}
+
+@media (max-width: 720px) {
+	main {
+		width: min(100% - 1rem, 1100px);
+		padding-top: 1rem;
+	}
+
+	section,
+	form {
+		padding: 1rem;
+		border-radius: 14px;
+	}
+
+	table,
+	thead,
+	tbody,
+	th,
+	td,
+	tr {
+		display: block;
+	}
+
+	thead {
+		position: absolute;
+		left: -9999px;
+		top: -9999px;
+	}
+
+	tr {
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		margin-bottom: 0.8rem;
+		overflow: hidden;
+		background: #fff;
+	}
+
+	th,
+	td {
+		border-bottom: 1px solid var(--border);
+	}
+
+	td:last-child {
+		border-bottom: none;
+	}
+}
