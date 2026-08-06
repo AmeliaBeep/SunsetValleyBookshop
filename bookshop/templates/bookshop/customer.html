@@ -47,16 +47,16 @@
             {% for item in order.items.all %}
             <tr>
                 <td>{{ item.book.title }}</td>
-                <td>{{ item.quantity }}x</td>
-                <td>{{ item.book.unit_price }}</td>
-                <td>{{ item.line_total }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>&sect;{{ item.book.unit_price }}</td>
+                <td>&sect;{{ item.line_total }}</td>
             </tr>
             {% endfor %}
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{ order.total_price }}</td>
+                <td>&sect;{{ order.total_price }}</td>
             </tr>
 
         </table>
