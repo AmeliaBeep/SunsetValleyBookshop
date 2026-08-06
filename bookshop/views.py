@@ -61,6 +61,9 @@ class CustomerListView(ListView):
     context_object_name = "customers"
     paginate_by = 20
 
+    def get_queryset(self):
+        return Customer.objects.order_by("status", "last_name", "first_name")
+
 
 class CustomerDetailView(DetailView):
     model = Customer
@@ -137,7 +140,5 @@ class OrderUpdateView(View):
                 item.order = order
                 item.save()
             order.save()
-            return HttpResponseRedirect(reverse('customer_list_view'))
 
-        return HttpResponseRedirect(reverse(d))
-
+        return HttpResponseRedirect(reverse('customer_list_view'))

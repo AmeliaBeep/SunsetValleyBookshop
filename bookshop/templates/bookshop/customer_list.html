@@ -19,12 +19,23 @@
         <td><a href="{% url 'customer_detail_view' customer.id %}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
         <td>{{ customer.orders.count }}</td>
         <td>{{ customer.status }}</td>
+    </tr>
     {% endfor %}
 
 </table>
 
+{% if is_paginated %}
+<nav aria-label="Customer pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>
+    {% endif %}
 
-
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+    {% endif %}
+    <p>Page {{ page_obj.number }} of {{ paginator.num_pages }}</p>
+</nav>
+{% endif %}
 
 
 {% endblock %}
