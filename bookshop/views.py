@@ -1,5 +1,5 @@
 import csv
-from django.db.models import F, IntegerField, Sum, Value
+from django.db.models import Case, Count, F, IntegerField, Sum, Value, When
 from django.db.models.functions import Coalesce, Concat
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -62,7 +62,17 @@ class CustomerListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Customer.objects.order_by("status", "last_name", "first_name")
+        return (
+            Customer.objects.annotate(
+                order_count=Count("orders"),
+                zero_order_bucket=Case(
+                    When(order_count=0, then=1),
+                    default=0,
+                    output_field=IntegerField(),
+                ),
+            )
+            .order_by("zero_order_bucket", "status", "last_name", "first_name")
+        )
 
 
 class CustomerDetailView(DetailView):
